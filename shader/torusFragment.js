@@ -10,7 +10,7 @@ uniform float uIorR;
 uniform float uIorG;
 uniform float uIorB;
 
-float reflectTest(vec3 eye, vec3 normal) {
+float specular(vec3 eye, vec3 normal) {
     return pow(1.0 + dot(eye, normal), 2.);
 }
 
@@ -38,7 +38,7 @@ void main() {
     // float b = texture2D(tScene, screenUV + refractVecB.xy).b;
 
     //uvのずらしにnormalを活用する場合？
-    float f = reflectTest(vEye, vNormal);
+    float f = specular(vEye, vNormal);
     float refractPower = (1.0 - uRefractPower) * (1.0 - 0.6) + 0.6;
     f = smoothstep(0.1, refractPower, f);
 
